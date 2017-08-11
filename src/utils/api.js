@@ -1,6 +1,11 @@
 // set API endpoint
 const api = "https://localhost:5001"
 
+const headers = {
+  'Accept': 'application/json',
+  'Authorization': 'token'
+}
+
 // get all categories
 export const getAllCategories = () =>
   fetch(`${api}/categories`,{ headers })
