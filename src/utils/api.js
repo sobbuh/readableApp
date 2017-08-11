@@ -6,18 +6,19 @@ const headers = {
   'Authorization': 'token'
 }
 
-// get all categories
-export const getAllCategories = () =>
-  fetch(`${api}/categories`,{ headers })
-    .then(res => res.json())
-    .then(data => data.categories)
-}
-
 // get all posts for a single 'category'
 export const getPostsForCategory = (category) =>
   fetch(`${api}/${category}/posts`, {headers})
   .then(res => res.json())
   .then(data => data.posts)
+
+// get all categories, GET ALL CATEGORIES
+  export const getAllCategories = () =>
+    fetch(`${api}/categories`,{ headers })
+      .then(res => res.json())
+      .then(data => data.categories)
+  }
+
 
 // get all posts, useful for the homepage
 export const getAllPosts = () =>
@@ -75,7 +76,7 @@ export const addComment = (id, timestamp, body, owner, parentId) =>
 
 
 // get comment details for a comment with 'id'
-export const getCommentDetails = (id) =>
+export const getComment = (id) =>
 fetch(`${api}/comments/${id}`, {headers})
 .then(res => res.json())
 .then(data => data.post)

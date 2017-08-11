@@ -1,21 +1,49 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import 'bulma/css/bulma.css'
+import { connect } from 'react-redux'
 
 class App extends Component {
+
+  state = {
+  posts: null,
+  categories: null,
+  comments: null
+  }
+
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <section className="hero is-primary is-bold">
+          <div className="hero-body">
+            <div className="container">
+              <h1 className="title">
+                Voter
+              </h1>
+              <h2 className="subtitle">
+                A react-based reddit clone
+              </h2>
+            </div>
+          </div>
+        </section>
+
+        
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps () {
+
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+  )(App)
