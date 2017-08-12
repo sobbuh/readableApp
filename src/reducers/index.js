@@ -1,4 +1,8 @@
 import { combineReducers } from 'redux'
+import PostsReducer from './reducer_posts'
+import CommentsReducer from './reducer_comments'
+import CategoriesReducer from './reducer_categories'
+
 import {
   ADD_COMMENT,
   ADD_POST,
@@ -22,43 +26,10 @@ const initialState = {
   comments: null
 }
 
-function posts (state = {}, action) {
-  switch (action.type) {
-    case ADD_POST :
-      const { id, timestamp, title, body, owner, category } = action
-      return {
-        ...state
-      }
-    case DELETE_POST :
-      const { delete_id } = action
-      return {
-        ...state.filter(post => post.id !== delete_id)
-      }
-    case EDIT_POST :
-      const { edit_id, edit_title, edit_body } = action
-      const editedPost = state.filter(post => post.id === edit_id)
-      editedPost.title = edit_title
-      editedPost.body = edit_body
-      return {
-        ...state.filter(post => post.id !== id).conc(editedPost)
-      }
-
-    default :
-      return state
-  }
-}
-
-
-function categories ( state = {}, action) {
-  return state
-}
-
-function comments ( state = {}, action){
-  return state
-}
-
-export default combineReducers({
-  posts,
-  categories,
-  comments
+const RootReducer = combineReducers({
+    posts: PostsReducer,
+    categories: CategoriesReducer,
+    comments: CommentsReducer,
 })
+
+export default RootReducer

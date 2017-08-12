@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import 'bulma/css/bulma.css'
+import '../App.css';
 import { connect } from 'react-redux'
+import Post from './post'
+import Comment from './comment'
+
 
 class App extends Component {
 
@@ -28,7 +29,7 @@ class App extends Component {
           </div>
         </section>
 
-        
+        <Post title={"Hello Voter"} body={"this worked!"} owner={"Sobbuh"} timestamp={"9:17 Aug 12 17"} score={0}  />
       </div>
     );
   }
