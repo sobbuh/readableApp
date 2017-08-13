@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 // import { selectPost }from '../actions/index'
 // import { bindActionCreators } from 'redux'
 
@@ -37,4 +37,25 @@ const Post= (props) => {
   )
 }
 
-export default Post
+function mapStateToProps(state){
+  return {
+    activePost : state.activePost
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  //whenever selectPost is called, result should be passed to reducers
+  return bindActionCreators({
+    selectPost: selectPost,
+    editPost: editPost,
+    deletePost: deletePost,
+    voteOnPost: voteOnPost,
+    editComment: editComment,
+    deleteComment: deleteComment,
+    voteOnComment: voteOnComment,
+    addComment: addComment
+    }, dispatch)
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(Post)

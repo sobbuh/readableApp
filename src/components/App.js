@@ -11,7 +11,8 @@ class App extends Component {
   state = {
   posts: null,
   categories: null,
-  comments: null
+  comments: null,
+  activePost: null,
   }
 
   render() {
