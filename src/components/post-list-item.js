@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux'
-// import { selectPost }from '../actions/index'
-// import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { selectPost }from '../actions/index'
+import { bindActionCreators } from 'redux'
 
-const Post= (props) => {
+const PostListItem = (props) => {
 
-  const {id, title, body, owner, score, timestamp} = "abc"
+  const {id, title, owner, score, timestamp} = "abc"
 
   return (
   <div>
@@ -37,4 +37,9 @@ const Post= (props) => {
   )
 }
 
-export default Post
+function mapDispatchToProps(dispatch){
+  //whenever selectPost is called, result should be passed to reducers
+  return bindActionCreators({selectPost: selectPost}, dispatch)
+}
+
+export default connect(mapDispatchToProps)(PostListItem)
