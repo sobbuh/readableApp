@@ -3,6 +3,7 @@ import '../App.css';
 import { connect } from 'react-redux'
 import Post from './post'
 import Comment from './comment'
+import PostList from '../containers/post-list'
 
 
 class App extends Component {
@@ -28,8 +29,7 @@ class App extends Component {
             </div>
           </div>
         </section>
-
-        <Post title={"Hello Voter"} body={"this worked!"} owner={"Sobbuh"} timestamp={"9:17 Aug 12 17"} score={0}  />
+        <PostList />
       </div>
     );
   }

@@ -1,8 +1,8 @@
 import React, { component } from 'react'
 import Post from '../components/post.js'
 import { connect } from 'react-redux'
-
-
+import { selectPost }from '../actions/index'
+import { bindActionCreators } from 'redux'
 
 class PostList extends Component {
 
