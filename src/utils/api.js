@@ -39,15 +39,9 @@ export const getPostsForCategory = (category) => {
       .then(data => data.categories)
   }
 
-
-// get all posts, useful for the homepage
 export const getAllPosts = () => {
-const url = `${api}/posts`
-const request = axios.get(url, headers)
-return {
-  type: GET_ALL_POSTS,
-  payload: request
-  }
+  return axios.get(`${api}/posts`, headers)
+    .then(res => res.data)
 }
 
 // get a specific post, by 'id'
