@@ -8,12 +8,11 @@ import PostList from '../containers/post-list'
 
 class App extends Component {
 
-  state = {
-  posts: [],
-  categories: [],
-  comments: [],
-  activePost: null,
-  }
+  componentDidMount() {
+  this.props.posts || this.props.getAllPosts();
+  this.props.categories || this.props.getAllCategories();
+}
+
 
   render() {
     return (
@@ -40,9 +39,8 @@ function mapStateToProps () {
 
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-  }
+function mapDispatchToProps = dispatch => {
+
 }
 
 export default connect(
