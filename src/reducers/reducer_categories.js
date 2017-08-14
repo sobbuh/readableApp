@@ -16,6 +16,6 @@ import {
 } from '../actions'
 
 
-export default function CategoriesReducer(){
+export default function categoriesReducer(){
   return {}
 }

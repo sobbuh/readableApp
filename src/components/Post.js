@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-// import { selectPost }from '../actions/index'
-// import { bindActionCreators } from 'redux'
+import * as actions from '../actions/index'
+import { bindActionCreators } from 'redux'
 
 const Post= (props) => {
 
@@ -46,14 +46,14 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
   //whenever selectPost is called, result should be passed to reducers
   return bindActionCreators({
-    selectPost: selectPost,
-    editPost: editPost,
-    deletePost: deletePost,
-    voteOnPost: voteOnPost,
-    editComment: editComment,
-    deleteComment: deleteComment,
-    voteOnComment: voteOnComment,
-    addComment: addComment
+    selectPost: actions.selectPost,
+    editPost: actions.editPost,
+    deletePost: actions.deletePost,
+    voteOnPost: actions.voteOnPost,
+    editComment: actions.editComment,
+    deleteComment: actions.deleteComment,
+    voteOnComment: actions.voteOnComment,
+    addComment: actions.addComment
     }, dispatch)
 }
 

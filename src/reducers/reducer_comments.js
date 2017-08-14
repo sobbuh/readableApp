@@ -15,6 +15,6 @@ import {
   VOTE_ON_POST
 } from '../actions'
 
-export default function CommentsReducer ( state = {}, action){
+export default function commentsReducer ( state = [], action){
   return state
 }

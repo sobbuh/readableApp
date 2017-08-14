@@ -6,9 +6,12 @@ import { connect } from 'react-redux'
 class PostList extends Component {
 
   renderList() {
-    return this.props.posts.map(post =>
-      <Post title={post.title} body={post.body} owner={post.owner} score={post.score} timestamp={post.timestamp} />
+
+    return (
+      this.props.posts.map(post =>
+      <PostListItem title={post.title} body={post.body} owner={post.owner} score={post.score} timestamp={post.timestamp} />
     )
+  )
   }
 
   render() {

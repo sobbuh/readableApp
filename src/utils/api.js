@@ -1,3 +1,22 @@
+import axios from 'axios'
+import {
+  ADD_COMMENT,
+  ADD_POST,
+  DELETE_COMMENT,
+  DELETE_POST,
+  EDIT_COMMENT,
+  EDIT_POST,
+  GET_ALL_POSTS,
+  GET_ALL_CATEGORIES,
+  GET_COMMENT,
+  GET_POST,
+  GET_POSTS_FOR_CATEGORY,
+  SELECT_CATEGORY,
+  VOTE_ON_COMMENT,
+  VOTE_ON_POST
+} from '../actions'
+
+
 // set API endpoint
 const api = "https://localhost:5001"
 
@@ -7,13 +26,14 @@ const headers = {
 }
 
 // get all posts for a single 'category'
-export const getPostsForCategory = (category) =>
+export const getPostsForCategory = (category) => {
   fetch(`${api}/${category}/posts`, {headers})
   .then(res => res.json())
   .then(data => data.posts)
+}
 
 // get all categories, GET ALL CATEGORIES
-  export const getAllCategories = () =>
+  export const getAllCategories = () => {
     fetch(`${api}/categories`,{ headers })
       .then(res => res.json())
       .then(data => data.categories)
@@ -21,10 +41,14 @@ export const getPostsForCategory = (category) =>
 
 
 // get all posts, useful for the homepage
-export const getAllPosts = () =>
-fetch(`${api}/posts`, {headers})
-.then(res => res.json())
-.then(data => data.posts)
+export const getAllPosts = () => {
+const url = `${api}/posts`
+const request = axios.get(url, headers)
+return {
+  type: GET_ALL_POSTS,
+  payload: request
+  }
+}
 
 // get a specific post, by 'id'
 export const getPost = (id) =>
@@ -103,7 +127,7 @@ body: JSON.stringify({option})
 }).then(res => res.json())
 
 // edit the details of a comment
-export const editComment = (timestamp, body) =>
+export const editComment = (id, timestamp, body) =>
 fetch(`${api}/comments/${id}`, {
   method: 'PUT',
   headers: {

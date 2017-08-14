@@ -1,3 +1,6 @@
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { getAllPosts } from '../actions'
 import {
   ADD_COMMENT,
   ADD_POST,
@@ -15,7 +18,8 @@ import {
   VOTE_ON_POST
 } from '../actions'
 
-export default function PostReducer (state = {}, action) {
+
+export default function postsReducer (state = [], action) {
   switch (action.type) {
     case ADD_POST :
       const { id, timestamp, title, body, owner, category } = action
@@ -36,9 +40,7 @@ export default function PostReducer (state = {}, action) {
         ...state.posts.filter(post => post.id !== id).conc(editedPost)
       }
     case GET_ALL_POSTS :
-      return {
-        ...state.posts
-      }
+      return [action.payload]
     default :
       return state
   }

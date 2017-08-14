@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export const ADD_COMMENT = 'ADD_COMMENT'
 export const ADD_POST = 'ADD_POST'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
@@ -14,6 +16,12 @@ export const SELECT_CATEGORY = 'SELECT_CATEGORY'
 export const VOTE_ON_POST = 'VOTE_ON_POST'
 export const VOTE_ON_COMMENT = 'VOTE_ON_COMMENT'
 
+const api = "https://localhost:5001"
+
+const headers = {
+  'Accept': 'application/json',
+  'Authorization': 'token'
+}
 // 1
 export function addComment ({ id, timestamp, body, owner, parentId }) {
   return {
@@ -54,11 +62,11 @@ export function deletePost({id}){
 }
 
 export function editComment ({id, body}) {
-  return new Promise(function(resolve, reject) {
+  return {
     type: EDIT_COMMENT,
     id,
     body
-  });
+  }
 }
 
 export function editPost ({id, body, title}) {
@@ -82,9 +90,12 @@ export function getAllComments() {
   }
 }
 
-export function getAllPosts() {
-  return {
-    type: GET_ALL_POSTS
+export const getAllPosts = () => {
+const url = `${api}/posts`
+const request = axios.get(url, headers)
+return {
+  type: GET_ALL_POSTS,
+  payload: request
   }
 }
 

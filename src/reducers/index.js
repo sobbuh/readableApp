@@ -26,10 +26,10 @@ const initialState = {
   comments: null
 }
 
-const RootReducer = combineReducers({
-    posts: PostsReducer,
-    categories: CategoriesReducer,
-    comments: CommentsReducer,
+const rootReducer = combineReducers({
+    posts: postsReducer,
+    categories: categoriesReducer,
+    comments: commentsReducer,
 })
 
-export default RootReducer
+export default rootReducer

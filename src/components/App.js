@@ -9,9 +9,9 @@ import PostList from '../containers/post-list'
 class App extends Component {
 
   state = {
-  posts: null,
-  categories: null,
-  comments: null,
+  posts: [],
+  categories: [],
+  comments: [],
   activePost: null,
   }
 
