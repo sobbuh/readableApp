@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import '../App.css';
 import { connect } from 'react-redux'
-import Post from './post'
-import Comment from './comment'
 import PostList from '../containers/post-list'
+import { bindActionCreators } from 'redux'
+import { fetchCategories, fetchPosts } from '../actions/index.js'
 
 
 class App extends Component {
-
   componentDidMount() {
-  this.props.posts || this.props.getAllPosts();
-  this.props.categories || this.props.getAllCategories();
+  this.props.fetchCategories();
+  this.props.fetchPosts();
+  console.log(this.props)
 }
 
 
@@ -35,15 +35,14 @@ class App extends Component {
   }
 }
 
-function mapStateToProps () {
-
-}
-
-function mapDispatchToProps = dispatch => {
-
+const mapStateToProps = state => {
+  return {
+    posts: state.posts.posts,
+    categories: state.categories.categories
+  }
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  {fetchCategories, fetchPosts}
   )(App)

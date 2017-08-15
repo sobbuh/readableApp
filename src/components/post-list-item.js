@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { selectPost }from '../actions/index'
 import { bindActionCreators } from 'redux'
+import FontAwesome from 'react-fontawesome'
 
 const PostListItem = (props) => {
 
@@ -12,15 +13,15 @@ const PostListItem = (props) => {
     <div className="column is-offset-2 box is-two-thirds">
       <article className="media">
         <div className="media-left">
-          <figure className="image is-64x64">
-            <img src="http://bulma.io/images/placeholders/128x128.png" alt="Image" />
-          </figure>
+          <p>^</p>
+          <p>{props.score}</p>
+          <p>^</p>
         </div>
     <div className="media-content">
       <div className="content">
-        <p onClick={() => this.props.selectPost(id)}>{title}</p>
+        <p onClick={() => this.props.selectPost(id)}>{props.title}</p>
         <br/>
-        <strong><small>{owner}</small> <small>{timestamp}</small></strong>
+        <strong><small>{props.owner}</small> <small>{props.timestamp}</small></strong>
       </div>
       <nav className="level is-mobile">
         <div className="level-left">

@@ -13,3 +13,6 @@ export const SELECT_POST = 'SELECT_POST'
 export const SELECT_CATEGORY = 'SELECT_CATEGORY'
 export const VOTE_ON_POST = 'VOTE_ON_POST'
 export const VOTE_ON_COMMENT = 'VOTE_ON_COMMENT'
+
+export const LOAD_CATEGORIES = 'LOAD_CATEGORIES'
+export const LOAD_POSTS = 'LOAD_POSTS'

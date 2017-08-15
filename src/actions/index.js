@@ -1,12 +1,6 @@
-import axios from 'axios'
 import * as types from './actionTypes.js'
+import * as api from '../utils/api.js'
 
-const api = "https://localhost:5001"
-
-const headers = {
-  'Accept': 'application/json',
-  'Authorization': 'token'
-}
 // 1
 export function addComment ({ id, timestamp, body, owner, parentId }) {
   return {
@@ -63,9 +57,21 @@ export function editPost ({id, body, title}) {
   }
 }
 
-export function getAllCategories() {
-  return {
-    type: types.GET_ALL_CATEGORIES
+export const loadCategories = (categories) => ({type: types.LOAD_CATEGORIES, payload: categories})
+
+export const fetchCategories = () => {
+  return (dispatch) => {
+    api.getAllCategories()
+    .then(categories => dispatch(loadCategories(categories)))
+  }
+}
+
+export const loadPosts = (posts) => ({type: types.LOAD_POSTS, payload: posts})
+
+export const fetchPosts = () => {
+  return (dispatch) => {
+    api.getAllPosts()
+    .then(posts => dispatch(loadPosts(posts)))
   }
 }
 
@@ -75,14 +81,6 @@ export function getAllComments() {
   }
 }
 
-export const getAllPosts = () => {
-const url = `${api}/posts`
-const request = axios.get(url, headers)
-return {
-  type: types.GET_ALL_POSTS,
-  payload: request
-  }
-}
 
 export function selectPost({id}) {
   return {

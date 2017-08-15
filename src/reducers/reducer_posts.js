@@ -24,9 +24,10 @@ export default function postsReducer (state = [], action) {
       return {
         ...state.posts.filter(post => post.id !== id).conc(editedPost)
       }
-    case types.GET_ALL_POSTS :
-      return [action.payload]
+    case types.LOAD_POSTS:
+      return {...state, posts: action.payload}
     default :
       return state
 
-}
+    }
+  }

@@ -11,5 +11,4 @@ export default {
     comments: [],
     fetching: false
   },
-  currentPost: "",
-};
+}

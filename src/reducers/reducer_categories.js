@@ -1,21 +1,12 @@
-import {
-  ADD_COMMENT,
-  ADD_POST,
-  DELETE_COMMENT,
-  DELETE_POST,
-  EDIT_COMMENT,
-  EDIT_POST,
-  GET_ALL_POSTS,
-  GET_ALL_CATEGORIES,
-  GET_COMMENT,
-  GET_POST,
-  GET_POSTS_FOR_CATEGORY,
-  SELECT_CATEGORY,
-  VOTE_ON_COMMENT,
-  VOTE_ON_POST
-} from '../actions'
+import * as types from '../actions/actionTypes'
 
 
-export default function categoriesReducer(){
-  return {}
+export default function categoriesReducer(state = [], action){
+  switch (action.type) {
+  case types.LOAD_CATEGORIES:
+    return {...state, categories: action.payload}
+  default:
+  return state
+
+  }
 }

@@ -13,7 +13,13 @@ class PostList extends Component {
 
     return (
       this.props.posts.map(post =>
-      <PostListItem title={post.title} body={post.body} owner={post.owner} score={post.score} timestamp={post.timestamp} />
+      <PostListItem
+        key={post.id}
+        title={post.title}
+        body={post.body}
+        owner={post.author}
+        score={post.voteScore}
+        timestamp={post.timestamp} />
     )
   )
   }
@@ -29,7 +35,7 @@ class PostList extends Component {
 
 function mapStateToProps(state){
   return {
-    posts : state.posts
+    posts : state.posts.posts
   }
 }
 
