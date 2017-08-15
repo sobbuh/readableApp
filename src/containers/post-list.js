@@ -5,6 +5,10 @@ import { connect } from 'react-redux'
 
 class PostList extends Component {
 
+  componentDidMount(){
+
+  }
+
   renderList() {
 
     return (
