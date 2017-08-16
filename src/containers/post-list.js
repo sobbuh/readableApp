@@ -19,6 +19,7 @@ class PostList extends Component {
         title={post.title}
         owner={post.author}
         score={post.voteScore}
+        category={post.category}
         timestamp={post.timestamp} />
     )
   )

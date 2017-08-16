@@ -82,18 +82,18 @@ export const fetchPosts = () => {
   }
 }
 
+export const loadPost = (post) => ({type: types.LOAD_POST, payload: post})
+
+export const selectPost = (id) => {
+  return (dispatch) => {
+    api.getPost(id)
+    .then(post => dispatch(loadPost(post)))
+  }
+}
 
 export function getAllComments() {
   return {
     type: types.GET_ALL_COMMENTS
-  }
-}
-
-
-export function selectPost({id}) {
-  return {
-    type: types.SELECT_POST,
-    id
   }
 }
 

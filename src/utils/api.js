@@ -9,7 +9,7 @@ const api = "http://localhost:5001"
 const headers = {
   headers: {
   Authorization: 'auth'
-}
+  }
 }
 
 // get all posts for a single 'category'
@@ -19,7 +19,7 @@ export const getPostsForCategory = (category) => {
 }
 
 // get all categories, GET ALL CATEGORIES
-  export const getAllCategories = () => {
+export const getAllCategories = () => {
   return axios.get(`${api}/categories`, headers)
       .then(res => res.name)
   }
@@ -30,10 +30,10 @@ export const getAllPosts = () => {
 }
 
 // get a specific post, by 'id'
-export const getPost = (id) =>
-  fetch(`${api}/${id}`, {headers})
-  .then(res => res.json())
-  .then(data => data.post)
+export const getPost = (id) => {
+  return axios.get(`${api}/${id}`, headers)
+  .then(res => res.data)
+}
 
 // edit the title and body of a post using the post 'id'
 export const editPost = (id, title, body) =>

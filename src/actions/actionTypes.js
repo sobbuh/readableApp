@@ -16,3 +16,5 @@ export const VOTE_ON_COMMENT = 'VOTE_ON_COMMENT'
 
 export const LOAD_CATEGORIES = 'LOAD_CATEGORIES'
 export const LOAD_POSTS = 'LOAD_POSTS'
+
+export const LOAD_POST = 'LOAD_POST'

@@ -43,7 +43,6 @@ class App extends Component {
       </div>
     </header>
   </div>
-
         <PostList />
         <AddPostForm />
         <div className="open-add-post is-primary"><a>add</a></div>

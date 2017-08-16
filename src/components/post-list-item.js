@@ -5,11 +5,12 @@ import { bindActionCreators } from 'redux'
 import FontAwesome from 'react-fontawesome'
 import ReduxThunk from 'redux-thunk'
 import { displayTime } from '../utils/helpers'
+import { Link } from 'react-router-dom'
 
 const PostListItem = (props) => {
 
   console.log(props)
-  const {id, title, owner, score, timestamp, selectPost} = props
+  const {id, title, owner, score, timestamp, category, selectPost} = props
   const postTime = displayTime(timestamp);
   const author = `posted by ${owner}`
 
@@ -24,7 +25,7 @@ const PostListItem = (props) => {
         </div>
     <div className="media-content">
       <div className="content">
-        <p className="post-title" onClick={() => selectPost(id)}>{title}</p>
+        <Link to={`/${category}/${id}`}><p className="post-title" onClick={() => selectPost(id)}>{title}</p></Link>
         <span className="post-owner"><strong><small>{author}</small>
         <small>{postTime}</small></strong></span>
       </div>

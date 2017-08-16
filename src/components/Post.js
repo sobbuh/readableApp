@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 
 const Post= (props) => {
 
-  const {id, title, body, owner, score, timestamp} = "abc"
+  const {id, title, category, body, owner, score, timestamp} = "abc"
 
   return (
   <div>
