@@ -21,7 +21,7 @@ export const getPostsForCategory = (category) => {
 // get all categories, GET ALL CATEGORIES
 export const getAllCategories = () => {
   return axios.get(`${api}/categories`, headers)
-      .then(res => res.name)
+      .then(res => res.data)
   }
 
 export const getAllPosts = () => {

@@ -22,7 +22,7 @@ class PostList extends Component {
         category={post.category}
         timestamp={post.timestamp} />
     )
-  )
+    )
   }
 
   render() {
@@ -39,8 +39,5 @@ function mapStateToProps(state){
     posts : state.posts.posts
   }
 }
-
-
-
 
 export default connect(mapStateToProps)(PostList)
