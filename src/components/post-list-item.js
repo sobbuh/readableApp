@@ -3,10 +3,15 @@ import { connect } from 'react-redux'
 import { selectPost }from '../actions/index'
 import { bindActionCreators } from 'redux'
 import FontAwesome from 'react-fontawesome'
+import ReduxThunk from 'redux-thunk'
+import { displayTime } from '../utils/helpers'
 
 const PostListItem = (props) => {
 
-  const {id, title, owner, score, timestamp} = "abc"
+  console.log(props)
+  const {id, title, owner, score, timestamp, selectPost} = props
+  const postTime = displayTime(timestamp);
+  const author = `posted by ${owner}`
 
   return (
   <div>
@@ -14,19 +19,21 @@ const PostListItem = (props) => {
       <article className="media">
         <div className="media-left">
           <p>^</p>
-          <p>{props.score}</p>
+          <p>{score}</p>
           <p>^</p>
         </div>
     <div className="media-content">
       <div className="content">
-        <p onClick={() => this.props.selectPost(id)}>{props.title}</p>
-        <br/>
-        <strong><small>{props.owner}</small> <small>{props.timestamp}</small></strong>
+        <p className="post-title" onClick={() => selectPost(id)}>{title}</p>
+        <span className="post-owner"><strong><small>{author}</small>
+        <small>{postTime}</small></strong></span>
       </div>
       <nav className="level is-mobile">
         <div className="level-left">
           <a className="level-item">
-            <span className="icon is-small"><i className="fa fa-reply"></i></span>
+            <span className="small">edit</span>
+            <span className="spacer"></span>
+            <span className="small">delete</span>
           </a>
         </div>
       </nav>
@@ -43,4 +50,4 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators({selectPost: selectPost}, dispatch)
 }
 
-export default connect(mapDispatchToProps)(PostListItem)
+export default connect(null,mapDispatchToProps)(PostListItem)

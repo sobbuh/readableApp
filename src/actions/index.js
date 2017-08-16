@@ -26,6 +26,13 @@ export function addPost ({ id, timestamp, body, title, owner, category }) {
   }
 }
 
+export const savePost = (title) => {
+  return (dispatch) => {
+    api.addPost(title)
+    .then(res => dispatch(addPost(title)))
+  }
+}
+
 export function deleteComment({id}){
   return {
     type: types.DELETE_COMMENT,
@@ -74,6 +81,7 @@ export const fetchPosts = () => {
     .then(posts => dispatch(loadPosts(posts)))
   }
 }
+
 
 export function getAllComments() {
   return {

@@ -15,8 +15,8 @@ class PostList extends Component {
       this.props.posts.map(post =>
       <PostListItem
         key={post.id}
+        id={post.id}
         title={post.title}
-        body={post.body}
         owner={post.author}
         score={post.voteScore}
         timestamp={post.timestamp} />

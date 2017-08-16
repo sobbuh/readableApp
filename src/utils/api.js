@@ -47,8 +47,8 @@ body: JSON.stringify({ title, body })
 }).then(res => res.json())
 
 // add a post with all of the necessary information
-export const addPost = (id, timestamp, title, body, owner, category) =>
-  fetch(`${api}/posts`, {
+export const addPost = (id, timestamp, title, body, owner, category) => {
+    return fetch(`${api}/posts`, {
     method: 'PUT',
     headers: {
       ...headers,
@@ -56,7 +56,7 @@ export const addPost = (id, timestamp, title, body, owner, category) =>
     },
     body: JSON.stringify({ id, timestamp, title, body, owner, category })
   }).then(res => res.json())
-
+}
 // TODO: implement delete a post
 
 
