@@ -3,17 +3,21 @@ import { connect } from 'react-redux'
 
 class Categories extends Component {
 
-  componentDidMount(){
+  
 
-  }
 
   categoryList() {
-    return (
-      this.props.categories.map(category => {
+    if (Array.isArray(this.props.categories))
+    {
+      console.log(this.props.categories)
+      return this.props.categories.map(category => {
         <span className="tag">{category.name}</span>
-        console.log(category.name)
-    }))
-  }
+      })}
+      else {
+        return []
+      }
+    }
+
 
   render() {
 

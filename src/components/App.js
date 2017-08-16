@@ -10,6 +10,7 @@ import Header from './header'
 class App extends Component {
   componentDidMount() {
     this.props.fetchCategories();
+    console.log(this.props.categories)
     this.props.fetchPosts();
   }
 
