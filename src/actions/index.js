@@ -73,8 +73,10 @@ export const fetchCategories = () => {
   }
 }
 
+// WORKING
 export const loadPosts = (posts) => ({type: types.LOAD_POSTS, payload: posts})
 
+// WORKING
 export const fetchPosts = () => {
   return (dispatch) => {
     api.getAllPosts()
@@ -82,8 +84,18 @@ export const fetchPosts = () => {
   }
 }
 
+//WORKING
+export const fetchPostsForCategory = (category) => {
+  return (dispatch) => {
+    api.getPostsForCategory(category)
+    .then(posts => dispatch(loadPosts(posts)))
+  }
+}
+
+// WORKING
 export const loadPost = (post) => ({type: types.LOAD_POST, payload: post})
 
+// WORKING
 export const selectPost = (id) => {
   return (dispatch) => {
     api.getPost(id)
@@ -104,12 +116,7 @@ export function selectComment({id}) {
   }
 }
 
-export function selectCategory({name}) {
-  return {
-    type: types.SELECT_CATEGORY,
-    name
-  }
-}
+
 
 export function voteOnComment({id,option}) {
   return {

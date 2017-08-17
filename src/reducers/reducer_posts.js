@@ -28,6 +28,7 @@ export default function postsReducer (state = [], action) {
       return {...state, posts: action.payload}
     default :
       return state
-
+    case types.LOAD_CATEGORY_POSTS:
+      return {...state, posts: action.payload}
     }
   }

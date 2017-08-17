@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { selectPost }from '../actions/index'
+import { selectPost } from '../actions/index'
 import { bindActionCreators } from 'redux'
 import FontAwesome from 'react-fontawesome'
 import ReduxThunk from 'redux-thunk'

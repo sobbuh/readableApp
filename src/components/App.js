@@ -10,13 +10,14 @@ import Header from './header'
 class App extends Component {
   componentDidMount() {
     this.props.fetchCategories();
-    console.log(this.props.categories)
     this.props.fetchPosts();
+    console.log(this.props)
   }
 
   render() {
     return (
       <div>
+        {console.log(this.props)}
         <Header />
         <Routes />
         <div className="open-add-post is-primary"><a>add</a></div>

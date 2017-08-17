@@ -14,14 +14,15 @@ const headers = {
 
 // get all posts for a single 'category'
 export const getPostsForCategory = (category) => {
-  fetch(`${api}/${category}/posts`, headers)
+  return axios.get(`${api}/${category}/posts`, headers)
   .then(res => res.name)
 }
 
 // get all categories, GET ALL CATEGORIES
 export const getAllCategories = () => {
   return axios.get(`${api}/categories`, headers)
-      .then(res => res.data)
+      .then(res => res.data.categories)
+      .then(data => data.map(cat => cat.name));
   }
 
 export const getAllPosts = () => {

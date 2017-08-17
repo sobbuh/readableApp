@@ -18,9 +18,9 @@ export default class Header extends Component {
               <span></span>
             </span>
             <div className="nav-right nav-menu">
-              <a className="nav-item is-active">
+              <Link to="/" className="nav-item is-active">
                 Home
-              </a>
+              </Link>
               <Link to="/categories" className="nav-item">
               Categories
             </Link>

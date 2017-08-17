@@ -1,38 +1,28 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { fetchCategories } from '../actions/index.js'
 
 class Categories extends Component {
+  componentDidMount(){
 
-  
 
-
-  categoryList() {
-    if (Array.isArray(this.props.categories))
-    {
-      console.log(this.props.categories)
-      return this.props.categories.map(category => {
-        <span className="tag">{category.name}</span>
-      })}
-      else {
-        return []
-      }
-    }
-
+  }
 
   render() {
-
+    const {categories} = this.props.categories
     return (
+      <div className="column box is-offset-4 is-half">
       <div className="tags">
-        {this.categoryList()}
+        {categories.map(category => <span className="tag">{category}</span>)}
       </div>
-
+    </div>
     )
   }
 }
 
 function mapStateToProps(state){
   return {
-    categories : state.categories.categories
+    categories : state.categories
   }
 }
 
