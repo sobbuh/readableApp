@@ -13,7 +13,7 @@ export function addComment ({ id, timestamp, body, owner, parentId }) {
   }
 }
 
-// 2
+/*
 export function addPost ({ id, timestamp, body, title, owner, category }) {
   return {
     type: types.ADD_POST,
@@ -32,6 +32,8 @@ export const savePost = (title) => {
     .then(res => dispatch(addPost(title)))
   }
 }
+
+*/
 
 export function deleteComment({id}){
   return {
@@ -102,6 +104,7 @@ export const selectPost = (id) => {
     .then(post => dispatch(loadPost(post)))
   }
 }
+
 
 export function getAllComments() {
   return {

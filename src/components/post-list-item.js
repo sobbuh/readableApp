@@ -19,9 +19,9 @@ const PostListItem = (props) => {
     <div className="column is-offset-2 box is-two-thirds">
       <article className="media">
         <div className="media-left">
-          <p>^</p>
+          <img src="./sprites/arrow-up.jpg" width="12px" />
           <p>{score}</p>
-          <p>^</p>
+          <img src="./sprites/arrow-down.jpg" width="12px" />
         </div>
     <div className="media-content">
       <div className="content">

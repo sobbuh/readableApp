@@ -20,7 +20,7 @@ class App extends Component {
         {console.log(this.props)}
         <Header />
         <Routes />
-        <div className="open-add-post is-primary"><a>add</a></div>
+        <div className="open-add-post is-primary"><Link to="/addPost">add</Link></div>
       </div>
     )
   }

@@ -19,3 +19,5 @@ export const LOAD_POSTS = 'LOAD_POSTS'
 export const LOAD_CATEGORY_POSTS = 'LOAD_CATEGORY_POSTS'
 
 export const LOAD_POST = 'LOAD_POST'
+
+export const CREATE_POST = 'CREATE_POST'

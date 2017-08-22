@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { connect } from 'reat-redux'
+import { connect } from 'react-redux'
 
 class CategoryPage extends Component {
 
@@ -7,6 +7,11 @@ class CategoryPage extends Component {
 
 }
 
+function mapStateToProps(state){
+  return {
+    categories : state.categories
+  }
+}
 
 
 export default connect(mapStateToProps)(CategoryPage)

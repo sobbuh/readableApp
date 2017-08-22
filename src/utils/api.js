@@ -48,16 +48,16 @@ body: JSON.stringify({ title, body })
 }).then(res => res.json())
 
 // add a post with all of the necessary information
-export const addPost = (id, timestamp, title, body, owner, category) => {
-    return fetch(`${api}/posts`, {
-    method: 'PUT',
-    headers: {
-      ...headers,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ id, timestamp, title, body, owner, category })
-  }).then(res => res.json())
+export function createPost(props) {
+
+    const request = axios.post(`${api}/posts`, props)
+
+    return {
+      type: types.CREATE_POST,
+      payload: request
+    }
 }
+
 // TODO: implement delete a post
 
 

@@ -1,49 +1,93 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { Field, reduxForm } from 'redux-form'
+
+class AddPostForm extends Component {
+
+  renderField(field){
+    return (
+      <div className="field">
+        <div className="control">
+        <label className="label">{field.label}</label>
+        <input
+          className={field.inputType}
+          type="text"
+          {...field.input}
+        />
+        <p class="help is-danger">{field.meta.error}</p>
+      </div>
+      </div>
+    )
+  }
+
+  onSubmit(values){
+    console.log(values)
+  }
+
+  render() {
+    const { handleSubmit } = this.props
+
+    return (
+    <div className="column is-offset-2 box is-two-thirds">
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+
+       <Field
+         label="TITLE"
+         name="title"
+         inputType="input"
+         component={this.renderField}
+       />
+
+       <Field
+         label="AUTHOR"
+         name="owner"
+         inputType="input"
+         component={this.renderField}
+       />
+
+       <Field
+         label="CATEGORY"
+         name="category"
+         inputType="input"
+         component={this.renderField}
+       />
+
+       <Field
+         label="BODY"
+         name="body"
+         inputType="textarea"
+         component={this.renderField}
+       />
 
 
-const AddPostForm = (props) => {
+       <button className="button is-link" type="submit"><Link to="/">Submit</Link></button>
+       <button className="button is-link"><Link to="/">Cancel</Link></button>
 
-  return (
-<div className="column is-offset-2 box is-two-thirds">
-    <div className="field">
-  <label className="label">Title</label>
-  <div className="control">
-    <input className="input" type="text" placeholder="Give your post a title" />
-  </div>
-  </div>
+     </form>
+   </div>
 
-<div className="field">
-<label className="label">Author</label>
-<div className="control">
-<input className="input" type="text" placeholder="What's your name?" />
-</div>
-</div>
-
-<div className="field">
-<label className="label">Category</label>
-<div className="control">
-<input className="input" type="text" placeholder="Pick a Category" />
-</div>
-</div>
-
-<div className="field">
-  <label className="label">Body</label>
-  <div className="control">
-    <textarea className="textarea" placeholder="Write your post"></textarea>
-  </div>
-</div>
-
-<div className="field is-grouped">
-  <div className="control">
-    <button className="button is-primary">Submit</button>
-  </div>
-  <div className="control">
-    <button className="button is-link">Cancel</button>
-  </div>
-</div>
-</div>
-
-  )
+      )
+    }
 }
+     function validate(values){ // 136 values contain all values that have been entered into form
+     const errors={};
+     if(!values.title || values.title.length < 3){
+     errors.title = "Enter a title with at least 3 characters!";
+     }
 
-export default AddPostForm
+     if(!values.category){
+     errors.category = "Enter a category";
+     }
+
+     if(!values.body){
+     errors.body = "Enter some content";
+     }
+     return errors;
+    }
+
+
+
+export default reduxForm({
+  validate: validate,
+  form: 'AddNewPost',
+})(AddPostForm)
