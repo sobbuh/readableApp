@@ -4,6 +4,7 @@ import Categories from '../components/categories'
 import AddPostForm from '../components/add-post-form'
 import { connect } from 'react-redux'
 import { fetchPosts, fetchCategories } from '../actions'
+import {DropdownPostSorter } from './dropdown-post-sorter'
 import _ from 'lodash'
 
 class HomePage extends Component{
@@ -21,7 +22,6 @@ class HomePage extends Component{
       <div>
         <Categories />
         <PostList />
-
       </div>
     )
   }

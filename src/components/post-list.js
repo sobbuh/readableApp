@@ -3,13 +3,17 @@ import { connect } from 'react-redux'
 import { fetchPosts } from '../actions/index.js'
 import { Link } from 'react-router-dom'
 import PostListItem from './post-list-item'
+import DropdownPostSorter from './dropdown-post-sorter'
 import _ from 'lodash'
 
 class PostList extends Component {
 
   renderList() {
+    const orderedPosts = _.orderBy(this.props.posts, this.props.orderBy, 'desc')
+    console.log(orderedPosts)
+    console.log(this.props)
     return (
-      _.map(this.props.posts, post =>
+      _.map(orderedPosts, post =>
       <PostListItem
         key={post.id}
         id={post.id}
@@ -22,9 +26,14 @@ class PostList extends Component {
     )
   }
 
+
   render() {
     return (
-      <div>{this.renderList()}</div>
+
+      <div className="is-two-thirds column is-offset-2">
+        <DropdownPostSorter onChange={this.onChangeSort}/>
+        {this.renderList()}
+      </div>
     )
   }
 
@@ -34,7 +43,8 @@ class PostList extends Component {
 
 function mapStateToProps(state){
   return {
-    posts : state.posts
+    posts : state.posts,
+    orderBy : state.orderBy
   }
 }
 

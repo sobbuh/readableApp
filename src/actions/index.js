@@ -161,3 +161,11 @@ export function voteOnPost({id,option}) {
     option
   }
 }
+
+export function changeOrder(option) {
+  console.log('changeOrder called')
+  return {
+    type: types.CHANGE_ORDER,
+    option
+  }
+}

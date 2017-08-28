@@ -16,7 +16,7 @@ const PostListItem = (props) => {
 
   return (
   <div>
-    <div className="column is-offset-2 box is-two-thirds">
+    <div className="column box">
       <article className="media">
         <div className="media-left">
           <img src="./sprites/arrow-up.jpg" width="12px" />

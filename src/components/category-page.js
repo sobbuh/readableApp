@@ -19,5 +19,4 @@ function mapStateToProps(state, ownProps){
   }
 }
 
-
 export default connect(mapStateToProps, { getPostsForCategory})(CategoryPage)

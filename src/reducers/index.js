@@ -2,6 +2,8 @@ import { combineReducers } from 'redux'
 import postsReducer from './reducer_posts'
 import commentsReducer from './reducer_comments'
 import categoriesReducer from './reducer_categories'
+import orderByReducer from './reducer_orderBy'
+
 import { reducer as FormReducer } from 'redux-form'
 
 import * as types from '../actions'
@@ -17,6 +19,7 @@ const rootReducer = combineReducers({
     categories: categoriesReducer,
     comments: commentsReducer,
     form: FormReducer,
+    orderBy: orderByReducer
 })
 
 export default rootReducer

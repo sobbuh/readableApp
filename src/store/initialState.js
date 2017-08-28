@@ -1,5 +1,6 @@
 export default {
   categories: [],
   posts: {},
-  comments: {}
+  comments: {},
+  orderBy: 'voteScore'
 }
