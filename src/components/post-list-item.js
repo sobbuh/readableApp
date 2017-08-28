@@ -32,7 +32,7 @@ const PostListItem = (props) => {
       <nav className="level is-mobile">
         <div className="level-left">
           <p className="level-item">
-            <span className="small"><Link to={`/edit/${id}`}>edit</Link></span>
+            <span className="small"><Link to={`/${category}/${id}/edit`}>edit</Link></span>
             <span className="spacer"></span>
             <span className="small">delete</span>
           </p>

@@ -1,10 +1,35 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, initialize } from 'redux-form'
 import { createPost } from '../utils/api.js'
 import { connect } from 'react-redux'
+import { fetchPost } from '../actions'
 
-class AddPostForm extends Component {
+class EditPostForm extends Component {
+
+  componentDidMount(){
+    console.log(this.props)
+    if (!this.props.post){
+      const { postId } = this.props.match.params
+      console.log(postId)
+      if (postId){
+      this.props.fetchPost(postId)
+    }}
+    if (this.props.post){
+      this.handleInitialize();
+    }
+  }
+
+  handleInitialize() {
+  const initData = {
+    "title": this.props.post.title,
+    "owner": this.props.post.owner,
+    "category": this.props.post.category,
+    "body": this.props.post.body,
+  };
+
+  this.props.initialize(initData);
+}
 
   renderField(field){
     return (
@@ -27,8 +52,17 @@ class AddPostForm extends Component {
     this.props.history.push('/')})
   }
 
+
   render() {
     const { handleSubmit } = this.props
+
+    if (!this.props.post) {
+      return (
+        <div>Loading...</div>
+      )
+    }
+
+    else {
 
     return (
     <div className="column is-offset-2 box is-two-thirds">
@@ -69,7 +103,7 @@ class AddPostForm extends Component {
      </form>
    </div>
 
-      )
+ )}
     }
 }
      function validate(values){ // 136 values contain all values that have been entered into form
@@ -88,9 +122,11 @@ class AddPostForm extends Component {
      return errors;
     }
 
-
+function mapStateToProps({ posts }, ownProps){
+      return {post : posts[ownProps.match.params.id]}
+    }
 
 export default reduxForm({
   validate: validate,
-  form: 'AddNewPost',
-})(connect(null,{ createPost })(AddPostForm))
+  form: 'EditPost',
+})(connect(mapStateToProps,{ createPost, fetchPost })(EditPostForm))

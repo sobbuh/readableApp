@@ -25,7 +25,7 @@ class PostDetail extends Component {
 
     else {
 
-    const {id, title, owner, score, timestamp, category, selectPost} = this.props.post
+    const {id, title, owner, score, timestamp, category, selectPost, body} = this.props.post
     const postTime = displayTime(timestamp);
     const author = `posted by ${owner}`
 
@@ -44,11 +44,12 @@ class PostDetail extends Component {
           <Link to={`/${category}/${id}`}><p className="post-title">{title}</p></Link>
           <span className="post-owner"><strong><small>{author}</small>
           <small>{postTime}</small></strong></span>
+          <p>{body}</p>
         </div>
         <nav className="level is-mobile">
           <div className="level-left">
             <a className="level-item">
-              <span className="small"><Link to={`/edit/${id}`}>edit</Link></span>
+              <span className="small"><Link to={`/${category}/${id}/edit`}>edit</Link></span>
               <span className="spacer"></span>
               <span className="small">delete</span>
             </a>
