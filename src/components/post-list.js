@@ -1,18 +1,15 @@
 import React, { Component } from 'react'
-import PostListItem from '../components/post-list-item.js'
 import { connect } from 'react-redux'
-
+import { fetchPosts } from '../actions/index.js'
+import { Link } from 'react-router-dom'
+import PostListItem from './post-list-item'
+import _ from 'lodash'
 
 class PostList extends Component {
 
-  componentDidMount(){
-
-  }
-
   renderList() {
-
     return (
-      this.props.posts.map(post =>
+      _.map(this.props.posts, post =>
       <PostListItem
         key={post.id}
         id={post.id}
@@ -27,17 +24,18 @@ class PostList extends Component {
 
   render() {
     return (
-      <div>
-        {this.renderList()}
-      </div>
+      <div>{this.renderList()}</div>
     )
   }
+
+
+
 }
 
 function mapStateToProps(state){
   return {
-    posts : state.posts.posts
+    posts : state.posts
   }
 }
 
-export default connect(mapStateToProps)(PostList)
+export default connect(mapStateToProps, { fetchPosts })(PostList)

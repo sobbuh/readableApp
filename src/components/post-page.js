@@ -14,8 +14,7 @@ class PostPage extends Component {
     const activePost = this.setActivePost()
 
     return (
-
-      <PostDoesntExist />
+      <PostDetail />
     )
   }
 

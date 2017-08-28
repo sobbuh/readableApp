@@ -1,5 +1,13 @@
 import * as types from './actionTypes.js'
 import * as api from '../utils/api.js'
+import axios from 'axios'
+
+const ROOT_URL = "http://localhost:5001"
+const headers = {
+  headers: {
+  Authorization: 'auth'
+  }
+}
 
 // 1
 export function addComment ({ id, timestamp, body, owner, parentId }) {
@@ -69,10 +77,13 @@ export function editPost ({id, body, title}) {
 export const loadCategories = (categories) => ({type: types.LOAD_CATEGORIES, payload: categories})
 
 export const fetchCategories = () => {
-  return (dispatch) => {
-    api.getAllCategories()
-    .then(categories => dispatch(loadCategories(categories)))
+  const request = axios.get(`${ROOT_URL}/categories`, headers)
+
+  return {
+    type: types.FETCH_CATEGORIES,
+    payload: request
   }
+
 }
 
 // WORKING
@@ -80,9 +91,20 @@ export const loadPosts = (posts) => ({type: types.LOAD_POSTS, payload: posts})
 
 // WORKING
 export const fetchPosts = () => {
-  return (dispatch) => {
-    api.getAllPosts()
-    .then(posts => dispatch(loadPosts(posts)))
+  const request = axios.get(`${ROOT_URL}/posts`, headers)
+  return {
+    type: types.FETCH_POSTS,
+    payload: request
+  }
+}
+
+export const fetchPost = (id) => {
+
+  const request = axios.get(`${ROOT_URL}/posts/${id}`, headers)
+
+  return {
+    type: types.FETCH_POST,
+    payload: request
   }
 }
 
@@ -106,11 +128,14 @@ export const selectPost = (id) => {
 }
 
 
-export function getAllComments() {
-  return {
-    type: types.GET_ALL_COMMENTS
+export function fetchComments() {
+  return (dispatch) => {
+    api.getAllComments()
+    .then(comments => dispatch(loadComments(comments)))
   }
 }
+
+export const loadComments = (comments) => ({type: types.LOAD_COMMENTS, payload: comments})
 
 export function selectComment({id}) {
   return {

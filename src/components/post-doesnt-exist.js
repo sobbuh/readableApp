@@ -1,5 +1,5 @@
 import React from 'react'
-import CategoryPage from './categoryPage'
+import CategoryPage from './category-page'
 
 const PostDoesntExist = () => {
   return (

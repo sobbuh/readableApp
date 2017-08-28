@@ -4,6 +4,7 @@ import * as types from '../actions/actionTypes'
 
 // set API endpoint
 const api = "http://localhost:5001"
+let currPostId = 1
 
 
 const headers = {
@@ -15,7 +16,7 @@ const headers = {
 // get all posts for a single 'category'
 export const getPostsForCategory = (category) => {
   return axios.get(`${api}/${category}/posts`, headers)
-  .then(res => res.name)
+  .then(res => res.data)
 }
 
 // get all categories, GET ALL CATEGORIES
@@ -25,9 +26,10 @@ export const getAllCategories = () => {
       .then(data => data.map(cat => cat.name));
   }
 
-export const getAllPosts = () => {
-  return axios.get(`${api}/posts`, headers)
-    .then(res => res.data)
+
+export const getAllComments = () => {
+  return axios.get(`${api}/comments`, headers)
+  .then(res => res.data)
 }
 
 // get a specific post, by 'id'
@@ -48,10 +50,13 @@ body: JSON.stringify({ title, body })
 }).then(res => res.json())
 
 // add a post with all of the necessary information
-export function createPost(props) {
+export function createPost(props, callback) {
+    props.timestamp = new Date()
+    props.id = currPostId
+    currPostId += 1 
 
-    const request = axios.post(`${api}/posts`, props)
-
+    const request = axios.post(`${api}/posts`, props, headers)
+      .then(() => callback)
     return {
       type: types.CREATE_POST,
       payload: request
