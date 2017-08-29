@@ -13,6 +13,7 @@ const headers = {
   }
 }
 
+
 // get all posts for a single 'category'
 export const getPostsForCategory = (category) => {
   return axios.get(`${api}/${category}/posts`, headers)
@@ -49,11 +50,12 @@ headers: {
 body: JSON.stringify({ title, body })
 }).then(res => res.json())
 
+
 // add a post with all of the necessary information
 export function createPost(props, callback) {
     props.timestamp = new Date()
     props.id = currPostId
-    currPostId += 1 
+    currPostId += 1
 
     const request = axios.post(`${api}/posts`, props, headers)
       .then(() => callback)
@@ -61,28 +63,7 @@ export function createPost(props, callback) {
       type: types.CREATE_POST,
       payload: request
     }
-}
-
-// TODO: implement delete a post
-
-
-//get all comments for a single post
-export const getCommentsForPost = (id) =>
-  fetch(`${api}/posts/${id}/comments`, {headers})
-  .then(res => res.json())
-  .then(data => data.post)
-
-// add a comment
-export const addComment = (id, timestamp, body, owner, parentId) =>
-  fetch(`${api}/comments`, {
-    method: 'POST',
-    headers: {
-      ...headers,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ id, timestamp, body, owner, parentId })
-  }).then(res => res.json())
-
+  }
 
 // get comment details for a comment with 'id'
 export const getComment = (id) =>

@@ -6,7 +6,6 @@ import orderByReducer from './reducer_orderBy'
 
 import { reducer as FormReducer } from 'redux-form'
 
-import * as types from '../actions'
 
 const initialState = {
   categories: null,

@@ -9,39 +9,7 @@ const headers = {
   }
 }
 
-// 1
-export function addComment ({ id, timestamp, body, owner, parentId }) {
-  return {
-    type: types.ADD_COMMENT,
-    id,
-    timestamp,
-    body,
-    owner,
-    parentId
-  }
-}
-
-/*
-export function addPost ({ id, timestamp, body, title, owner, category }) {
-  return {
-    type: types.ADD_POST,
-    id,
-    timestamp,
-    title,
-    body,
-    owner,
-    category
-  }
-}
-
-export const savePost = (title) => {
-  return (dispatch) => {
-    api.addPost(title)
-    .then(res => dispatch(addPost(title)))
-  }
-}
-
-*/
+let currCommentId = 1
 
 export function deleteComment({id}){
   return {
@@ -92,8 +60,17 @@ export const loadPosts = (posts) => ({type: types.LOAD_POSTS, payload: posts})
 // WORKING
 export const fetchPosts = () => {
   const request = axios.get(`${ROOT_URL}/posts`, headers)
+  console.log('fetchPosts')
   return {
     type: types.FETCH_POSTS,
+    payload: request
+  }
+}
+
+export const voteOnPost = (id,option) => {
+  const request = axios.post(`${ROOT_URL}/posts/${id}`, {option: `${option}`}, headers)
+  return {
+    type: types.VOTE_ON_POST,
     payload: request
   }
 }
@@ -108,14 +85,6 @@ export const fetchPost = (id) => {
   }
 }
 
-//WORKING
-export const fetchPostsForCategory = (category) => {
-  return (dispatch) => {
-    api.getPostsForCategory(category)
-    .then(posts => dispatch(loadPosts(posts)))
-  }
-}
-
 // WORKING
 export const loadPost = (post) => ({type: types.LOAD_POST, payload: post})
 
@@ -127,13 +96,37 @@ export const selectPost = (id) => {
   }
 }
 
+export const createComment = (props, callback) => {
+    props.timestamp = new Date()
+    props.id = currCommentId
+    currCommentId += 1
 
-export function fetchComments() {
-  return (dispatch) => {
-    api.getAllComments()
-    .then(comments => dispatch(loadComments(comments)))
-  }
+    const request = axios.post(`${ROOT_URL}/comments`, props, headers)
+      .then(() => callback)
+    return {
+      type: types.CREATE_COMMENT,
+      payload: request
+    }
 }
+
+export const fetchComments = (id) => {
+    const request = axios.get(`${ROOT_URL}/posts/${id}/comments`, headers)
+    console.log('fetchComments',request)
+    return {
+      type: types.FETCH_COMMENTS,
+      payload: request
+    }
+  }
+
+export const countComments = (id) => {
+      const request = axios.get(`${ROOT_URL}/posts/${id}/comments`, headers)
+      console.log(request)
+      return {
+        type: types.COUNT_COMMENTS,
+        payload: request,
+        id: id
+      }
+    }
 
 export const loadComments = (comments) => ({type: types.LOAD_COMMENTS, payload: comments})
 
@@ -154,16 +147,10 @@ export function voteOnComment({id,option}) {
   }
 }
 
-export function voteOnPost({id,option}) {
-  return {
-    type: types.VOTE_ON_POST,
-    id,
-    option
-  }
-}
+
 
 export function changeOrder(option) {
-  console.log('changeOrder called')
+
   return {
     type: types.CHANGE_ORDER,
     option

@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { selectPost } from '../actions/index'
-import { bindActionCreators } from 'redux'
+import { selectPost, voteOnPost } from '../actions'
 import FontAwesome from 'react-fontawesome'
-import ReduxThunk from 'redux-thunk'
 import { displayTime } from '../utils/helpers'
 import { Link } from 'react-router-dom'
 
-const PostListItem = (props) => {
+class PostListItem extends Component {
 
-  console.log(props)
-  const {id, title, owner, score, timestamp, category, selectPost} = props
+
+  render() {
+  const {id, title, owner, score, timestamp, category, selectPost, voteOnPost, numComments } = this.props
   const postTime = displayTime(timestamp);
   const author = `posted by ${owner}`
 
@@ -19,9 +18,10 @@ const PostListItem = (props) => {
     <div className="column box">
       <article className="media">
         <div className="media-left">
-          <img src="./sprites/arrow-up.jpg" width="12px" />
+          <img src="./sprites/arrow-up.jpg" width="12px" onClick={() => {voteOnPost(id,'upVote')}
+          }/>
           <p>{score}</p>
-          <img src="./sprites/arrow-down.jpg" width="12px" />
+          <img src="./sprites/arrow-down.jpg" width="12px" onClick={() => {voteOnPost(id,'downVote')}}/>
         </div>
     <div className="media-content">
       <div className="content">
@@ -32,6 +32,7 @@ const PostListItem = (props) => {
       <nav className="level is-mobile">
         <div className="level-left">
           <p className="level-item">
+            <span className="small">{`Comments(${numComments})`}</span>
             <span className="small"><Link to={`/${category}/${id}/edit`}>edit</Link></span>
             <span className="spacer"></span>
             <span className="small">delete</span>
@@ -44,11 +45,8 @@ const PostListItem = (props) => {
   </div>
 
   )
+
+  }
 }
 
-function mapDispatchToProps(dispatch){
-  //whenever selectPost is called, result should be passed to reducers
-  return bindActionCreators({selectPost: selectPost}, dispatch)
-}
-
-export default connect(null,mapDispatchToProps)(PostListItem)
+export default connect(null,{ selectPost, voteOnPost})(PostListItem)

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router';
 import HomePage from './homepage'
 import PostDetail from './post-detail'
 import Categories from './categories';

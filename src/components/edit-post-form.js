@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { Field, reduxForm, initialize } from 'redux-form'
 import { createPost } from '../utils/api.js'
 import { connect } from 'react-redux'
 import { fetchPost } from '../actions'
+
 
 class EditPostForm extends Component {
 
@@ -126,7 +127,7 @@ function mapStateToProps({ posts }, ownProps){
       return {post : posts[ownProps.match.params.id]}
     }
 
-export default reduxForm({
+export default withRouter(reduxForm({
   validate: validate,
   form: 'EditPost',
-})(connect(mapStateToProps,{ createPost, fetchPost })(EditPostForm))
+})(connect(mapStateToProps,{ createPost, fetchPost })(EditPostForm)))

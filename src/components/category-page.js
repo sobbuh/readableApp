@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { getPostsForCategory } from '../utils/api'
+import PostList from './post-list'
 
 class CategoryPage extends Component {
   componentDidMount(){
@@ -9,10 +10,14 @@ class CategoryPage extends Component {
   }
 
   render() {
-    console.log(this.props.posts)
-    return ('')}
-}
+    return (
+    <div>
+      <PostList />
+    </div>
+    )
 
+}
+}
 function mapStateToProps(state, ownProps){
   return {
     posts : state.posts

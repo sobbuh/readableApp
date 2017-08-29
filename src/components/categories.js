@@ -11,7 +11,6 @@ class Categories extends Component {
   render() {
     const {categories} = this.props
 
-    console.log(categories)
     return (
       <div className="column box is-offset-3 is-half">
       <h2 className="has-text-primary has-text-centered">What's Popular?</h2>

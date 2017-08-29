@@ -1,0 +1,39 @@
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { fetchComments } from '../actions/index.js'
+import { Link } from 'react-router-dom'
+import _map from 'lodash.map'
+import Comment from './comment'
+
+
+class Comments extends Component {
+
+  renderComments(){
+      console.log(this.props.comments)
+      return (
+      _map(this.props.comments, comment=>
+      <Comment
+        key={comment.id}
+        comment={comment}
+       />
+    )
+    )
+  }
+
+  render() {
+    console.log(this.props.comments)
+    return (
+      <div>
+          {this.renderComments()}
+      </div>
+    )
+  }
+}
+
+function mapStateToProps(state){
+  return {
+    comments : state.comments
+  }
+}
+
+export default connect(mapStateToProps, { fetchComments })(Comments)

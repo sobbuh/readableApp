@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Field, reduxForm } from 'redux-form'
-import { createPost } from '../utils/api.js'
+import { createComment } from '../actions/'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 
-class AddPostForm extends Component {
+class AddCommentForm extends Component {
 
   renderField(field){
     return (
@@ -24,8 +23,8 @@ class AddPostForm extends Component {
   }
 
   onSubmit(values){
-    console.log(this.props.parentId)
-    this.props.createPost(values, () => {
+    values.parentId = this.props.parentId
+    this.props.createComment(values, () => {
     this.props.history.push('/')})
   }
 
@@ -37,22 +36,8 @@ class AddPostForm extends Component {
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 
        <Field
-         label="TITLE"
-         name="title"
-         inputType="input"
-         component={this.renderField}
-       />
-
-       <Field
          label="AUTHOR"
          name="owner"
-         inputType="input"
-         component={this.renderField}
-       />
-
-       <Field
-         label="CATEGORY"
-         name="category"
          inputType="input"
          component={this.renderField}
        />
@@ -63,8 +48,6 @@ class AddPostForm extends Component {
          inputType="textarea"
          component={this.renderField}
        />
-
-
 
 
        <button className="button is-link" type="submit">Submit</button>
@@ -78,13 +61,6 @@ class AddPostForm extends Component {
 }
      function validate(values){ // 136 values contain all values that have been entered into form
      const errors={};
-     if(!values.title || values.title.length < 3){
-     errors.title = "Enter a title with at least 3 characters!";
-     }
-
-     if(!values.category){
-     errors.category = "Enter a category";
-     }
 
      if(!values.body){
      errors.body = "Enter some content";
@@ -92,13 +68,9 @@ class AddPostForm extends Component {
      return errors;
     }
 
-function mapStateToProps(state,ownProps){
-  return {
-    parentId : this.props.match.params.id
-  }
-}
 
-export default withRouter(reduxForm({
+
+export default reduxForm({
   validate: validate,
-  form: 'AddNewPost',
-})(connect(mapStateToProps,{ createPost })(AddPostForm)))
+  form: 'AddNewComment',
+})(connect(null,{ createComment })(AddCommentForm))

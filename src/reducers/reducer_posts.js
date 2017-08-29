@@ -9,7 +9,7 @@ export default function postsReducer (state = {}, action) {
   switch (action.type) {
     case types.CREATE_POST :
       return {
-        ...state,posts: action.payload
+        ...state, posts: action.payload
       }
     case types.DELETE_POST :
       const { delete_id } = action
@@ -30,6 +30,9 @@ export default function postsReducer (state = {}, action) {
       return _.mapKeys(action.payload.data, "id")
     case types.FETCH_POST:
       return {...state, [action.payload.data.id]: action.payload.data}
+    case types.VOTE_ON_POST:
+        console.log(action)
+        return {...state, [action.payload.data.id]: action.payload.data}
     default :
       return state
   }

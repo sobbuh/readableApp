@@ -3,21 +3,16 @@ import PostList from './post-list'
 import Categories from '../components/categories'
 import AddPostForm from '../components/add-post-form'
 import { connect } from 'react-redux'
-import { fetchPosts, fetchCategories } from '../actions'
+import { fetchPosts, fetchCategories, fetchComments } from '../actions'
 import {DropdownPostSorter } from './dropdown-post-sorter'
-import _ from 'lodash'
+import _map from 'lodash.map'
 
 class HomePage extends Component{
 
   componentDidMount(){
-    this.props.posts || this.props.fetchPosts()
-    this.props.categories || this.props.fetchCategories()
-
   }
 
-
   render(){
-
     return (
       <div>
         <Categories />
@@ -27,5 +22,12 @@ class HomePage extends Component{
   }
 }
 
+function mapStateToProps(state){
+  return {
+    posts : state.posts,
+    categories : state.categories,
+    comments: state.comments
+  }
+}
 
-export default connect(null, { fetchPosts, fetchCategories })(HomePage)
+export default connect(mapStateToProps, { fetchPosts, fetchCategories, fetchComments })(HomePage)

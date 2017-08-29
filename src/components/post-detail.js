@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux'
 import { displayTime } from '../utils/helpers'
 import { fetchPost } from '../actions'
 import { Link } from 'react-router-dom'
+import Comments from  './comments'
+import AddCommentForm from './add-comment'
 
 class PostDetail extends Component {
   componentDidMount(){
@@ -58,6 +60,8 @@ class PostDetail extends Component {
       </div>
     </article>
     </div>
+      <Comments />
+      <AddCommentForm parentId={id}/>
     </div>
 
   )}

@@ -1,22 +1,27 @@
 import React, { Component } from 'react';
 import '../App.css';
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { fetchCategories, fetchPosts, fetchComments } from '../actions/index.js'
 import { Link, withRouter } from 'react-router-dom'
 import Routes from './routes'
 import Header from './header'
-
+import _map from 'lodash.map'
 
 class App extends Component {
   componentDidMount() {
+
     this.props.fetchCategories()
     this.props.fetchPosts()
 
-    console.log(this.props)
+      _map(this.props.posts, post => {
+      this.props.fetchComments(post.id)
+      console.log('mapping')})
+      
+    console.log(this.props.comments)
   }
 
   render() {
+
     return (
       <div>
         <Header />
@@ -29,12 +34,10 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  
-  return {
 
-    posts: state.posts.posts,
-    categories: state.categories.categories,
-    comments: state.comments.comments
+  return {
+    posts: state.posts,
+    categories: state.categories,
   }
 }
 
