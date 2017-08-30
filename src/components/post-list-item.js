@@ -33,6 +33,7 @@ class PostListItem extends Component {
         <div className="level-left">
           <p className="level-item">
             <span className="small">{`Comments(${numComments})`}</span>
+            <span className="spacer"></span>
             <span className="small"><Link to={`/${category}/${id}/edit`}>edit</Link></span>
             <span className="spacer"></span>
             <span className="small">delete</span>

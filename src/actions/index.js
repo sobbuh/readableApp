@@ -105,6 +105,7 @@ export const createComment = (props, callback) => {
     props.timestamp = new Date()
     props.id = currCommentId
     currCommentId += 1
+    console.log(props.id, currCommentId)
 
     const request = axios.post(`${ROOT_URL}/comments`, props, headers)
       .then(() => callback)

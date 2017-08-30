@@ -13,7 +13,7 @@ class Routes extends Component {
       <div>
         <Route exact path="/" component={HomePage} />
         <Route path="/categories" component={Categories} />
-        <Route path="/categories/:category" component={CategoryPage} />
+        <Route path="/:category" component={CategoryPage} />
         <Route exact path="/:category/:id" component={PostDetail} />
         <Route path="/addpost" component={AddPostForm} />
         <Route path="/:category/:id/edit" component={EditPostForm} />

@@ -2,17 +2,16 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { getPostsForCategory } from '../utils/api'
 import PostList from './post-list'
+import _ from 'lodash'
 
 class CategoryPage extends Component {
-  componentDidMount(){
-    const category = this.props.match.params.category
-
-  }
 
   render() {
+    console.log(this.props)
+
     return (
     <div>
-      <PostList />
+      <PostList posts={this.props.posts} />
     </div>
     )
 
@@ -20,7 +19,7 @@ class CategoryPage extends Component {
 }
 function mapStateToProps(state, ownProps){
   return {
-    posts : state.posts
+    posts : _.filter(state.posts, ['category', ownProps.match.params.category])
   }
 }
 

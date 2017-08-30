@@ -43,7 +43,6 @@ class PostList extends Component {
 
 function mapStateToProps(state){
   return {
-    posts : state.posts,
     orderBy : state.orderBy,
     comments : state.comments
   }

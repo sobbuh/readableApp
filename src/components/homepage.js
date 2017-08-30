@@ -17,7 +17,7 @@ class HomePage extends Component{
     return (
       <div>
         <Categories />
-        <PostList />
+        <PostList posts={this.props.posts} />
       </div>
     )
   }
