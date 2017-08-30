@@ -55,12 +55,9 @@ export const fetchCategories = () => {
 }
 
 // WORKING
-export const loadPosts = (posts) => ({type: types.LOAD_POSTS, payload: posts})
-
-// WORKING
 export const fetchPosts = () => {
   const request = axios.get(`${ROOT_URL}/posts`, headers)
-  console.log('fetchPosts')
+
   return {
     type: types.FETCH_POSTS,
     payload: request
@@ -71,6 +68,14 @@ export const voteOnPost = (id,option) => {
   const request = axios.post(`${ROOT_URL}/posts/${id}`, {option: `${option}`}, headers)
   return {
     type: types.VOTE_ON_POST,
+    payload: request
+  }
+}
+
+export const voteOnComment = (id,option) => {
+  const request = axios.post(`${ROOT_URL}/comments/${id}`, {option: `${option}`}, headers)
+  return {
+    type: types.VOTE_ON_COMMENT,
     payload: request
   }
 }
@@ -110,23 +115,14 @@ export const createComment = (props, callback) => {
 }
 
 export const fetchComments = (id) => {
-    const request = axios.get(`${ROOT_URL}/posts/${id}/comments`, headers)
-    console.log('fetchComments',request)
+  const request = axios.get(`${ROOT_URL}/posts/${id}/comments`, headers)
+
     return {
       type: types.FETCH_COMMENTS,
-      payload: request
+      payload: request,
+      meta: id
     }
-  }
-
-export const countComments = (id) => {
-      const request = axios.get(`${ROOT_URL}/posts/${id}/comments`, headers)
-      console.log(request)
-      return {
-        type: types.COUNT_COMMENTS,
-        payload: request,
-        id: id
-      }
-    }
+}
 
 export const loadComments = (comments) => ({type: types.LOAD_COMMENTS, payload: comments})
 
@@ -136,18 +132,6 @@ export function selectComment({id}) {
     id
   }
 }
-
-
-
-export function voteOnComment({id,option}) {
-  return {
-    type: types.VOTE_ON_COMMENT,
-    id,
-    option
-  }
-}
-
-
 
 export function changeOrder(option) {
 

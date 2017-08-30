@@ -6,21 +6,23 @@ import { Link, withRouter } from 'react-router-dom'
 import Routes from './routes'
 import Header from './header'
 import _map from 'lodash.map'
+import _ from 'lodash'
+import { bindActionCreators } from 'redux'
 
 class App extends Component {
   componentDidMount() {
 
     this.props.fetchCategories()
-    this.props.fetchPosts()
-
-      _map(this.props.posts, post => {
-      this.props.fetchComments(post.id)
-      console.log('mapping')})
-      
-    console.log(this.props.comments)
-  }
+    console.log('fetched categories')
+    this.props.fetchPosts().
+    then(() => _map(this.props.posts, post => {
+     this.props.fetchComments(post.id)}))
+}
 
   render() {
+
+
+    console.log(this.props)
 
     return (
       <div>
@@ -38,10 +40,13 @@ const mapStateToProps = state => {
   return {
     posts: state.posts,
     categories: state.categories,
+    comments: state.comments
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({fetchCategories, fetchPosts, fetchComments}, dispatch )
+}
+
 export default withRouter(connect(
-  mapStateToProps,
-  {fetchCategories, fetchPosts, fetchComments}
-)(App))
+  mapStateToProps,mapDispatchToProps)(App))

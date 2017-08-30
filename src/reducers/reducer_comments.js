@@ -8,10 +8,13 @@ export default function commentsReducer ( state = [], action){
     ...state, comments: action.payload
     }
   case types.FETCH_COMMENTS:
-    console.log(action)
-    return _.mapKeys(action.payload.data, "id")
+    console.log(action.meta)
+    return  {...state, [action.meta]: action.payload.data}
   case types.LOAD_COMMENTS:
-    return {...state, comments: action.payload}
+    return {...state, comments: action.payload.data}
+  case types.VOTE_ON_COMMENT:
+    console.log(action)
+    return {...state, [action.payload.data.id]: action.payload.data}
   default :
     return state
   }

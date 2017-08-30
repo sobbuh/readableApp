@@ -2,20 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { displayTime } from '../utils/helpers'
-import { fetchPost } from '../actions'
+import { fetchPost, fetchComments } from '../actions'
 import { Link } from 'react-router-dom'
 import Comments from  './comments'
 import AddCommentForm from './add-comment'
 
 class PostDetail extends Component {
-  componentDidMount(){
-    if (!this.props.post){
-      const { postId } = this.props.match.params
-      console.log(postId)
-      if (postId){
-      this.props.fetchPost(postId)
-    }}
-  }
 
   render() {
     console.log(this.props)
@@ -60,7 +52,7 @@ class PostDetail extends Component {
       </div>
     </article>
     </div>
-      <Comments />
+      <Comments comments={this.props.comments}/>
       <AddCommentForm parentId={id}/>
     </div>
 
@@ -68,8 +60,9 @@ class PostDetail extends Component {
 }
 }
 
-function mapStateToProps({ posts }, ownProps){
-  return {post : posts[ownProps.match.params.id]}
+function mapStateToProps(state, ownProps){
+  return {post : state.posts[ownProps.match.params.id],
+  comments: state.comments[ownProps.match.params.id]}
 }
 
 

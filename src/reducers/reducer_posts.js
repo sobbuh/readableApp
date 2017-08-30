@@ -1,7 +1,4 @@
-import { connect } from 'react-redux'
 import _ from 'lodash'
-import { bindActionCreators } from 'redux'
-import { getAllPosts } from '../utils/api.js'
 import * as types from '../actions/actionTypes.js'
 
 

@@ -37,7 +37,7 @@ class AddCommentForm extends Component {
 
        <Field
          label="AUTHOR"
-         name="owner"
+         name="author"
          inputType="input"
          component={this.renderField}
        />

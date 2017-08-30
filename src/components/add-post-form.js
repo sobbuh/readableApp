@@ -24,7 +24,6 @@ class AddPostForm extends Component {
   }
 
   onSubmit(values){
-    console.log(this.props.parentId)
     this.props.createPost(values, () => {
     this.props.history.push('/')})
   }
@@ -45,7 +44,7 @@ class AddPostForm extends Component {
 
        <Field
          label="AUTHOR"
-         name="owner"
+         name="author"
          inputType="input"
          component={this.renderField}
        />
@@ -92,13 +91,9 @@ class AddPostForm extends Component {
      return errors;
     }
 
-function mapStateToProps(state,ownProps){
-  return {
-    parentId : this.props.match.params.id
-  }
-}
+
 
 export default withRouter(reduxForm({
   validate: validate,
   form: 'AddNewPost',
-})(connect(mapStateToProps,{ createPost })(AddPostForm)))
+})(connect(null,{ createPost })(AddPostForm)))

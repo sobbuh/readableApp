@@ -10,6 +10,7 @@ import _map from 'lodash.map'
 class HomePage extends Component{
 
   componentDidMount(){
+    console.log(this.props)
   }
 
   render(){

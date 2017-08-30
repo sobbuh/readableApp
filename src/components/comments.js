@@ -23,17 +23,12 @@ class Comments extends Component {
   render() {
     console.log(this.props.comments)
     return (
-      <div>
+      <div className="is-two-thirds column is-offset-2">
           {this.renderComments()}
       </div>
     )
   }
 }
 
-function mapStateToProps(state){
-  return {
-    comments : state.comments
-  }
-}
 
-export default connect(mapStateToProps, { fetchComments })(Comments)
+export default connect(null, { fetchComments })(Comments)
