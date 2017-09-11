@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { fetchPosts, fetchCategories, fetchComments } from '../actions'
 import {DropdownPostSorter } from './dropdown-post-sorter'
 import _map from 'lodash.map'
+import _ from 'lodash'
 
 class HomePage extends Component{
 
@@ -25,7 +26,7 @@ class HomePage extends Component{
 
 function mapStateToProps(state){
   return {
-    posts : state.posts,
+    posts : _.filter(state.posts,['deleted', false]),
     categories : state.categories,
     comments: state.comments
   }

@@ -1,6 +1,7 @@
 import * as types from './actionTypes.js'
 import * as api from '../utils/api.js'
 import axios from 'axios'
+import uuid from 'uuid/v4'
 
 const ROOT_URL = "http://localhost:5001"
 const headers = {
@@ -9,19 +10,39 @@ const headers = {
   }
 }
 
-let currCommentId = 1
+export const createPost = (props, callback) => {
+    props.timestamp = new Date()
+    const postId = uuid()
+    props.id = postId
 
-export function deleteComment({id}){
+
+    const request = axios.post(`${ROOT_URL}/posts`, props, headers).then(
+      () => callback)
+    console.log(request)
+    return {
+      type: types.CREATE_POST,
+      payload: request,
+      meta: postId
+    }
+  }
+
+export const deleteComment = (commentId) => {
+
+  const request = axios.delete(`${ROOT_URL}/comments/${commentId}`, headers)
+
   return {
     type: types.DELETE_COMMENT,
-    id
+    payload: request,
+    meta: commentId
   }
 }
 
-export function deletePost({id}){
+export const deletePost = (id) => {
+  const request = axios.delete(`${ROOT_URL}/posts/${id}`, headers)
   return {
     type: types.DELETE_POST,
-    id
+    payload: request,
+    meta: id
   }
 }
 
@@ -74,6 +95,7 @@ export const voteOnPost = (id,option) => {
 
 export const voteOnComment = (id,option) => {
   const request = axios.post(`${ROOT_URL}/comments/${id}`, {option: `${option}`}, headers)
+  console.log(request)
   return {
     type: types.VOTE_ON_COMMENT,
     payload: request
@@ -103,15 +125,15 @@ export const selectPost = (id) => {
 
 export const createComment = (props, callback) => {
     props.timestamp = new Date()
-    props.id = currCommentId
-    currCommentId += 1
-    console.log(props.id, currCommentId)
+    const commentId = uuid()
+    props.id = commentId
 
     const request = axios.post(`${ROOT_URL}/comments`, props, headers)
       .then(() => callback)
+    console.log(request)
     return {
       type: types.CREATE_COMMENT,
-      payload: request
+      payload: request,
     }
 }
 

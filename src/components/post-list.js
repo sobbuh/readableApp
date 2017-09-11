@@ -21,13 +21,16 @@ class PostList extends Component {
         score={post.voteScore}
         category={post.category}
         timestamp={post.timestamp}
-        numComments={(this.props.comments[post.id] || []).length}/>
+        numComments={(this.props.comments[post.id] || []).length}
+        comments={(_map(this.props.comments[post.id], comment => comment.id) || [])}
+      />
     )
     )
   }
 
 
   render() {
+    console.log(this.props)
     return (
 
       <div className="is-two-thirds column is-offset-2">
@@ -36,9 +39,6 @@ class PostList extends Component {
       </div>
     )
   }
-
-
-
 }
 
 function mapStateToProps(state){

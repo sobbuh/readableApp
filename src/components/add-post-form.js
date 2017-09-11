@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Field, reduxForm } from 'redux-form'
-import { createPost } from '../utils/api.js'
+import { createPost } from '../actions'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
@@ -24,8 +24,8 @@ class AddPostForm extends Component {
   }
 
   onSubmit(values){
-    this.props.createPost(values, () => {
-    this.props.history.push('/')})
+    this.props.createPost(values).then(
+    this.props.history.push('/'))
   }
 
   render() {

@@ -7,16 +7,20 @@ import { Link } from 'react-router-dom'
 
 class Comment extends Component {
     render(){
-      const {id, body, author, score } = this.props.comment
+      const {id, body, author, deleted} = this.props.comment
+      const { voteOnComment } = this.props
+      console.log(this.props)
+      if (deleted === false){
       return (
+
         <div>
           <div className="column box">
             <article className="media">
               <div className="media-left">
-                <img src="./sprites/arrow-up.jpg" width="12px" onClick={() => {voteOnComment(id,'upVote')}
+                <img src="../sprites/arrow-up.jpg" width="12px" onClick={() => {voteOnComment(id,'upVote')}
                 }/>
-                <p>{score}</p>
-                <img src="./sprites/arrow-down.jpg" width="12px" onClick={() => {voteOnComment(id,'downVote')}}/>
+                <p>{this.props.score}</p>
+                <img src="../sprites/arrow-down.jpg" width="12px" onClick={() => {voteOnComment(id,'downVote')}}/>
               </div>
           <div className="media-content">
             <div className="content">
@@ -36,9 +40,10 @@ class Comment extends Component {
         </article>
         </div>
         </div>
+      )}
 
-      )
     }
+
 }
 
-export default connect()(Comment)
+export default connect(null,{voteOnComment})(Comment)

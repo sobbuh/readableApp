@@ -13,11 +13,10 @@ class App extends Component {
   componentDidMount() {
 
     this.props.fetchCategories()
-    console.log('fetched categories')
     this.props.fetchPosts().
-    then(() => _map(this.props.posts, post => {
-     this.props.fetchComments(post.id)}))
-}
+      then(() => _map(this.props.posts, post => {
+        this.props.fetchComments(post.id)}))
+      }
 
   render() {
 

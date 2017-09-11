@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { selectPost, voteOnPost } from '../actions'
+import { selectPost, voteOnPost, deletePost, deleteComment } from '../actions'
 import FontAwesome from 'react-fontawesome'
 import { displayTime } from '../utils/helpers'
 import { Link } from 'react-router-dom'
@@ -9,7 +9,7 @@ class PostListItem extends Component {
 
 
   render() {
-  const {id, title, owner, score, timestamp, category, selectPost, voteOnPost, numComments } = this.props
+  const {id, title, owner, score, timestamp, category, selectPost, voteOnPost, deletePost, deleteComment, numComments, comments } = this.props
   const postTime = displayTime(timestamp);
   const author = `posted by ${owner}`
 
@@ -25,7 +25,7 @@ class PostListItem extends Component {
         </div>
     <div className="media-content">
       <div className="content">
-        <Link to={`/${category}/${id}`}><p className="post-title" onClick={() => selectPost(id)}>{title}</p></Link>
+        <Link to={`/${category}/${id}`}><p className="post-title">{title}</p></Link>
         <span className="post-owner"><strong><small>{author}</small>
         <small>{postTime}</small></strong></span>
       </div>
@@ -36,7 +36,10 @@ class PostListItem extends Component {
             <span className="spacer"></span>
             <span className="small"><Link to={`/${category}/${id}/edit`}>edit</Link></span>
             <span className="spacer"></span>
-            <span className="small">delete</span>
+            <span className="small" onClick={()=> {
+              deletePost(id)
+              this.props.comments.map(id => deleteComment(id))
+              }}>delete</span>
           </p>
         </div>
       </nav>
@@ -50,4 +53,4 @@ class PostListItem extends Component {
   }
 }
 
-export default connect(null,{ selectPost, voteOnPost})(PostListItem)
+export default connect(null,{ selectPost, voteOnPost, deletePost, deleteComment})(PostListItem)

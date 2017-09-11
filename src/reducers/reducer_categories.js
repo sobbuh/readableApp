@@ -6,7 +6,7 @@ export default function categoriesReducer(state = [], action){
   case types.FETCH_CATEGORIES:
     return action.payload.data.categories
   default:
-  return state
+    return state
 
   }
 }

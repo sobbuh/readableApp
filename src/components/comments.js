@@ -15,6 +15,7 @@ class Comments extends Component {
       <Comment
         key={comment.id}
         comment={comment}
+        score={comment.voteScore}
        />
     )
     )

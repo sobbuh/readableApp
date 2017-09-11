@@ -4,8 +4,15 @@ import _ from 'lodash'
 export default function commentsReducer ( state = [], action){
   switch(action.type) {
   case types.CREATE_COMMENT :
+    const { data } = action.payload
+    console.log(data)
+    console.log(action)
     return {
-    ...state, comments: action.payload
+    ...state, [data.parentId]: {...state, data}
+    }
+  case types.DELETE_COMMENT :
+    return {
+    ...state, [action.meta] : action.payload.data
     }
   case types.FETCH_COMMENTS:
     console.log(action.meta)

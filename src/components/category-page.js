@@ -5,21 +5,19 @@ import PostList from './post-list'
 import _ from 'lodash'
 
 class CategoryPage extends Component {
-
   render() {
-    console.log(this.props)
-
     return (
     <div>
       <PostList posts={this.props.posts} />
     </div>
     )
+  }
+}
 
-}
-}
 function mapStateToProps(state, ownProps){
+
   return {
-    posts : _.filter(state.posts, ['category', ownProps.match.params.category])
+    posts : _.filter(state.posts, {'category' : ownProps.match.params.category, 'deleted' : false})
   }
 }
 

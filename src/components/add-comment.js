@@ -24,13 +24,14 @@ class AddCommentForm extends Component {
 
   onSubmit(values){
     values.parentId = this.props.parentId
+    values.voteScore = 1
     this.props.createComment(values, () => {
     this.props.history.push('/')})
   }
 
   render() {
     const { handleSubmit } = this.props
-
+    console.log('add comment form')
     return (
     <div className="column is-offset-2 box is-two-thirds">
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
